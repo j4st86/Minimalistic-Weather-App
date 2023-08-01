@@ -1,5 +1,5 @@
 package com.example.minimalisticweatherapp.retrofit
 
-data class Clouds(
-    val all: Int
+data class RainData(
+    val `1h`: Double
 )

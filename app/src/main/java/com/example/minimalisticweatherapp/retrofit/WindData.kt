@@ -1,6 +1,6 @@
 package com.example.minimalisticweatherapp.retrofit
 
-data class Wind(
+data class WindData(
     val deg: Int,
     val gust: Double,
     val speed: Double

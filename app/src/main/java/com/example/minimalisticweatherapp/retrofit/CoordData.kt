@@ -1,6 +1,6 @@
 package com.example.minimalisticweatherapp.retrofit
 
-data class Coord(
+data class CoordData(
     val lat: Double,
     val lon: Double
 )

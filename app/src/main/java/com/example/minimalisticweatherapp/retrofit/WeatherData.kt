@@ -2,17 +2,17 @@ package com.example.minimalisticweatherapp.retrofit
 
 data class WeatherData(
     val base: String,
-    val clouds: Clouds,
+    val clouds: CloudsData,
     val cod: Int,
-    val coord: Coord,
+    val coord: CoordData,
     val dt: Int,
     val id: Int,
-    val main: Main,
+    val main: MainWeatherData,
     val name: String,
-    val rain: Rain,
+    val rain: RainData,
     val sys: Sys,
     val timezone: Int,
     val visibility: Int,
     val weather: List<Weather>,
-    val wind: Wind
+    val wind: WindData
 )

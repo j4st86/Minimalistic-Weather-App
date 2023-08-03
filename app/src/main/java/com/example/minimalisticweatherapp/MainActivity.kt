@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import com.example.minimalisticweatherapp.retrofit.WeatherApi
+import com.example.minimalisticweatherapp.retrofit.WeatherAPIService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,17 +29,19 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org")
+            .baseUrl("https://api.openweathermap.org/")
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create()).build()
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        val weatherApi = retrofit.create(WeatherApi::class.java)
+        val weatherApi = retrofit.create(WeatherAPIService::class.java)
 
         b.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
-                val weather = weatherApi.getWeather()
+                val weather = weatherApi.getWeather(44.34, 10.99,
+                    "4952f57884bddceab6b299e99f263f07", "metric")
                 runOnUiThread {
-                    tv.text = weather.main.temp.toString()
+                    tv.text = weather.mainWeatherData.temp.toString()
                 }
             }
         }

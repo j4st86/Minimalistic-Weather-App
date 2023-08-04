@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val tv = findViewById<TextView>(R.id.tv)
+        val textCity = findViewById<TextView>(R.id.textCity)
         val b = findViewById<Button>(R.id.button)
 
         val interceptor = HttpLoggingInterceptor()
@@ -39,9 +40,10 @@ class MainActivity : AppCompatActivity() {
         b.setOnClickListener{
             CoroutineScope(Dispatchers.IO).launch {
                 val weather = weatherApi.getWeather(44.34, 10.99,
-                    "4952f57884bddceab6b299e99f263f07", "metric")
+                    "4952f57884bddceab6b299e99f263f07", "metric", "en")
                 runOnUiThread {
                     tv.text = weather.mainWeatherData.temp.toString()
+                    textCity.text = weather.name
                 }
             }
         }

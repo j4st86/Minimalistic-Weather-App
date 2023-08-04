@@ -10,5 +10,6 @@ interface WeatherAPIService {
         @Query("lon") longitude: Double,
         @Query("appid") appID: String,
         @Query("units") units: String,
+        @Query("lang") lang: String,
     ): WeatherData
 }

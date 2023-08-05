@@ -1,30 +1,16 @@
 package com.example.minimalisticweatherapp
 
-import android.Manifest
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.app.ActivityCompat
-import com.example.minimalisticweatherapp.retrofit.WeatherAPIService
+import com.example.minimalisticweatherapp.retrofit.RetrofitClient
+import com.example.minimalisticweatherapp.retrofit.WeatherAPI
 import com.example.minimalisticweatherapp.retrofit.WeatherData
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,60 +18,21 @@ class MainActivity : AppCompatActivity() {
     private val tempTextView: AppCompatTextView by lazy { findViewById(R.id.temp_tv) }
     private val anotherTempTextView: AppCompatTextView by lazy { findViewById(R.id.another_temp_tv) }
 
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val retrofitClient: RetrofitClient = RetrofitClient()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var locationLatitude: Double = 0.0
-        var locationLongitude: Double = 0.0
+        var locationLatitude: Double = 60.0
+        var locationLongitude: Double = 50.0
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        fun getLastKnownLocation() {
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return
-            }
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location ->
-                    if (location != null) {
-                        locationLatitude = location.latitude
-                        locationLongitude = location.longitude
-                    }
-                }
-        }
-
-        getLastKnownLocation()
-
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-
-
-        val client = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/")
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val weatherApi = retrofit.create(WeatherAPIService::class.java)
+        val weatherAPI = retrofitClient.createRetrofit().create(WeatherAPI::class.java)
 
         CoroutineScope(Dispatchers.IO).launch {
 
-            getLastKnownLocation()
-
-            val weather: WeatherData = weatherApi.getWeather(
+            val weather: WeatherData = weatherAPI.getWeather(
                 locationLatitude, locationLongitude,
                 "4952f57884bddceab6b299e99f263f07", "metric", "en"
             )

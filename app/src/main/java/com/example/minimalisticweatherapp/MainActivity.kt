@@ -1,29 +1,73 @@
 package com.example.minimalisticweatherapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityCompat
 import com.example.minimalisticweatherapp.retrofit.WeatherAPIService
+import com.example.minimalisticweatherapp.retrofit.WeatherData
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private val weatherImageView: AppCompatImageView by lazy { findViewById(R.id.weather_iv) }
+    private val tempTextView: AppCompatTextView by lazy { findViewById(R.id.temp_tv) }
+    private val anotherTempTextView: AppCompatTextView by lazy { findViewById(R.id.another_temp_tv) }
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tv = findViewById<TextView>(R.id.tv)
-        val textCity = findViewById<TextView>(R.id.textCity)
-        val b = findViewById<Button>(R.id.button)
+        var locationLatitude: Double = 0.0
+        var locationLongitude: Double = 0.0
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        fun getLastKnownLocation() {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        locationLatitude = location.latitude
+                        locationLongitude = location.longitude
+                    }
+                }
+        }
+
+        getLastKnownLocation()
 
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
+
 
         val client = OkHttpClient.Builder()
             .addInterceptor(interceptor)
@@ -37,14 +81,23 @@ class MainActivity : AppCompatActivity() {
 
         val weatherApi = retrofit.create(WeatherAPIService::class.java)
 
-        b.setOnClickListener{
-            CoroutineScope(Dispatchers.IO).launch {
-                val weather = weatherApi.getWeather(44.34, 10.99,
-                    "4952f57884bddceab6b299e99f263f07", "metric", "en")
-                runOnUiThread {
-                    tv.text = weather.mainWeatherData.temp.toString()
-                    textCity.text = weather.name
-                }
+        CoroutineScope(Dispatchers.IO).launch {
+
+            getLastKnownLocation()
+
+            val weather: WeatherData = weatherApi.getWeather(
+                locationLatitude, locationLongitude,
+                "4952f57884bddceab6b299e99f263f07", "metric", "en"
+            )
+            runOnUiThread {
+                weatherImageView.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        this@MainActivity,
+                        R.drawable.ic_sun
+                    )
+                )
+                tempTextView.text = weather.mainWeatherData.temp.toString()
+                anotherTempTextView.text = weather.mainWeatherData.temp_max.toString()
             }
         }
     }

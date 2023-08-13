@@ -1,12 +1,19 @@
 package com.example.minimalisticweatherapp
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.minimalisticweatherapp.retrofit.RetrofitClient
 import com.example.minimalisticweatherapp.retrofit.WeatherResponse
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import retrofit2.Call
 import retrofit2.Response
 
@@ -16,22 +23,54 @@ class MainActivity : AppCompatActivity() {
     private val tempTextView: AppCompatTextView by lazy { findViewById(R.id.temp_tv) }
     private val anotherTempTextView: AppCompatTextView by lazy { findViewById(R.id.another_temp_tv) }
 
-//    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var locationLatitude: String = "50"
+    private var locationLongitude: String = "50"
 
-    private var locationLatitude: String = "60"
-    private var locationLongitude: String = "60"
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    companion object {
+        private const val REQUEST_LOCATION_PERMISSION = 42
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val retrofit = RetrofitClient.retrofitAPI
 
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            getLocationAndFetchWeather()
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
+            )
+        }
+    }
+
+    private fun getLocationAndFetchWeather() {
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                locationLatitude = location.latitude.toString()
+                locationLongitude = location.longitude.toString()
+
+                fetchWeatherData(locationLatitude, locationLongitude)
+            }
+        }
+    }
+
+    private fun fetchWeatherData(latitude: String, longitude: String) {
+        val retrofit = RetrofitClient.retrofitAPI
         val call = retrofit.getWeather(
-            locationLatitude, locationLongitude,
+            latitude, longitude,
             "4952f57884bddceab6b299e99f263f07", "metric", "en"
         )
-
         call.enqueue(object : retrofit2.Callback<WeatherResponse> {
             override fun onResponse(
                 call: Call<WeatherResponse>,
@@ -62,73 +101,20 @@ class MainActivity : AppCompatActivity() {
                 // handle error
             }
         })
+    }
 
-//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-//        if (ActivityCompat.checkSelfPermission(
-//                this,
-//                Manifest.permission.ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                this,
-//                Manifest.permission.ACCESS_COARSE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED
-//        ) {
-//
-//            val locationPermissionRequest = registerForActivityResult(
-//                ActivityResultContracts.RequestMultiplePermissions()
-//            ) { permissions ->
-//                when {
-//                    permissions.getOrDefault(
-//                        Manifest.permission.ACCESS_FINE_LOCATION, false
-//                    ) -> {
-//                        // Precise location access granted.
-//                    }
-//
-//                    permissions.getOrDefault(
-//                        Manifest.permission.ACCESS_COARSE_LOCATION, false
-//                    ) -> {
-//                        // Only approximate location access granted.
-//                    }
-//
-//                    else -> {
-//                        // No location access granted.
-//                    }
-//                }
-//            }
-//
-//            locationPermissionRequest.launch(
-//                arrayOf(
-//                    Manifest.permission.ACCESS_FINE_LOCATION,
-//                    Manifest.permission.ACCESS_COARSE_LOCATION
-//                )
-//            )
-//
-//        }
-//        fusedLocationClient.getCurrentLocation(
-//            Priority.PRIORITY_BALANCED_POWER_ACCURACY,
-//            object : CancellationToken() {
-//                override fun onCanceledRequested(p0: OnTokenCanceledListener) =
-//                    CancellationTokenSource().token
-//
-//                override fun isCancellationRequested() = false
-//            })
-//            .addOnSuccessListener { location: Location? ->
-//                if (location == null)
-//                    Toast.makeText(
-//                        this, "Cannot get location.", Toast.LENGTH_SHORT
-//                    ).show()
-//                else {
-//                    locationLatitude = location.latitude.toString()
-//                    locationLongitude = location.longitude.toString()
-//                }
-//
-//            }
-//
-//        weatherImageView.setImageDrawable(
-//            AppCompatResources.getDrawable(
-//                this, R.drawable.ic_sun
-//            )
-//        )
-//        tempTextView.text = weather.mainWeatherData.temp.toString()
-//        anotherTempTextView.text = weather.mainWeatherData.temp_max.toString()
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocationAndFetchWeather()
+            } else {
+                // handle error
+            }
+        }
     }
 }

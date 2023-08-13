@@ -1,15 +1,16 @@
 package com.example.minimalisticweatherapp.retrofit
 
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherAPI {
+interface OpenWeatherService {
     @GET("data/2.5/weather")
-    suspend fun getWeather(
+    fun getWeather(
         @Query("lat") latitude: String,
         @Query("lon") longitude: String,
         @Query("appid") appID: String,
         @Query("units") units: String,
         @Query("lang") lang: String,
-    ): WeatherData
+    ): Call<WeatherResponse>
 }

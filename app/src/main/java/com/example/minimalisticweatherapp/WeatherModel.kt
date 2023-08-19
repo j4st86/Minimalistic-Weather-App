@@ -1,44 +1,14 @@
 package com.example.minimalisticweatherapp
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.location.Location
-import androidx.core.app.ActivityCompat
 import com.example.minimalisticweatherapp.retrofit.RetrofitClient
 import com.example.minimalisticweatherapp.retrofit.WeatherResponse
-import com.google.android.gms.location.LocationServices
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WeatherModel : WeatherConstructor.Model {
+class WeatherModel : WeatherMain.Model {
 
     private val retrofit = RetrofitClient.retrofitAPI
-    override fun getCurrentLocation(callback: (Location?) -> Unit) {
-        val fusedLocationClient =
-            LocationServices.getFusedLocationProviderClient(context)   //?????????
-        if (ActivityCompat.checkSelfPermission(
-                context,    /// ?????????????
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                context,    /// ?????????????
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return
-        }
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            callback(location)
-        }
-    }
-
     override fun fetchWeatherData(
         latitude: String,
         longitude: String,

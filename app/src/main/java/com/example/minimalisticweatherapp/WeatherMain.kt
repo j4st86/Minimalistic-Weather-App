@@ -1,6 +1,7 @@
 package com.example.minimalisticweatherapp
 
-import com.example.minimalisticweatherapp.retrofit.WeatherResponse
+import android.location.Location
+import com.example.minimalisticweatherapp.model.WeatherResponse
 
 interface WeatherMain {
     interface View {
@@ -14,6 +15,7 @@ interface WeatherMain {
     }
 
     interface Model {
+        fun getCurrentLocation(callback: (Location?) -> Unit)
         fun fetchWeatherData(
             latitude: String,
             longitude: String,

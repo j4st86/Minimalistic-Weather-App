@@ -1,4 +1,4 @@
-package com.example.minimalisticweatherapp.retrofit
+package com.example.minimalisticweatherapp.model
 
 import com.google.gson.annotations.SerializedName
 

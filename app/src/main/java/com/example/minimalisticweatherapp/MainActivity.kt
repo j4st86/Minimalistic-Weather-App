@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.example.minimalisticweatherapp.model.LocationModel
 
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 
@@ -13,13 +14,18 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     private val anotherTempTextView: AppCompatTextView by lazy { findViewById(R.id.another_temp_tv) }
 
     private lateinit var presenter: WeatherMain.Presenter
+    private lateinit var locationData: LocationModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val model = WeatherModel(this)
-        presenter = WeatherPresenter(this, model)
+        val latitude = intent.getStringExtra("latitude")
+        val longitude = intent.getStringExtra("longitude")
+        locationData = LocationModel(latitude, longitude)
+
+        val model = WeatherModel()
+        presenter = WeatherPresenter(this, model, locationData)
 
         presenter.start()
     }
@@ -35,6 +41,8 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     }
 
     override fun showErrorMessage(message: String) {
-        // Display Error
+        //TODO Display Error
     }
+
+    // TODO Change app icon
 }

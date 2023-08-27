@@ -1,36 +1,26 @@
 package com.example.minimalisticweatherapp
 
-import android.content.Context
-import android.location.Location
-import com.example.minimalisticweatherapp.retrofit.RetrofitClient
 import com.example.minimalisticweatherapp.model.WeatherResponse
-import com.google.android.gms.location.LocationServices
+import com.example.minimalisticweatherapp.retrofit.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class WeatherModel(
-    private val context: Context
-) : WeatherMain.Model {
+class WeatherModel : WeatherMain.Model {
 
     private val retrofit = RetrofitClient.retrofitAPI
-    override fun getCurrentLocation(callback: (Location?) -> Unit) {
-        val fusedLocationClient =
-            LocationServices.getFusedLocationProviderClient(context) // context
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            callback(location)
-        }
-    }
 
     override fun fetchWeatherData(
-        latitude: String,
-        longitude: String,
+        latitude: String?,
+        longitude: String?,
         callback: (WeatherResponse?, Throwable?) -> Unit
     ) {
         val call = retrofit.getWeather(
             latitude, longitude,
             "4952f57884bddceab6b299e99f263f07", "metric", "en"
+
         )
+        // TODO Replace API key to gradle strings
         call.enqueue(object : Callback<WeatherResponse> {
             override fun onResponse(
                 call: Call<WeatherResponse>,

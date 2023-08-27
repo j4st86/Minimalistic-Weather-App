@@ -1,6 +1,5 @@
 package com.example.minimalisticweatherapp
 
-import android.location.Location
 import com.example.minimalisticweatherapp.model.WeatherResponse
 
 interface WeatherMain {
@@ -11,14 +10,12 @@ interface WeatherMain {
 
     interface Presenter {
         fun start()
-        fun onRequestPermissionResult(requestCode: Int, grantResult: IntArray)
     }
 
     interface Model {
-        fun getCurrentLocation(callback: (Location?) -> Unit)
         fun fetchWeatherData(
-            latitude: String,
-            longitude: String,
+            latitude: String?,
+            longitude: String?,
             callback: (WeatherResponse?, Throwable?) -> Unit
         )
     }

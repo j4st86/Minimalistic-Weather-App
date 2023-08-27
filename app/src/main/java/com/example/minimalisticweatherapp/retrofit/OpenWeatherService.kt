@@ -8,8 +8,8 @@ import retrofit2.http.Query
 interface OpenWeatherService {
     @GET("data/2.5/weather")
     fun getWeather(
-        @Query("lat") latitude: String,
-        @Query("lon") longitude: String,
+        @Query("lat") latitude: String?,
+        @Query("lon") longitude: String?,
         @Query("appid") appID: String,
         @Query("units") units: String,
         @Query("lang") lang: String,

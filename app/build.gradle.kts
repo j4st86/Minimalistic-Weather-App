@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.minimalisticweatherapp"
+    namespace = "com.minimalisticweatherapp"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.minimalisticweatherapp"
+        applicationId = "com.minimalisticweatherapp"
         minSdk = 24
         targetSdk = 33
         versionCode = 1

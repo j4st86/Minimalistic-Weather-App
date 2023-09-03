@@ -1,11 +1,11 @@
-package com.example.minimalisticweatherapp
+package com.minimalisticweatherapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import com.example.minimalisticweatherapp.model.LocationModel
+import com.minimalisticweatherapp.model.LocationModel
 
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     }
 
     companion object {
-        const val EXTRA_LOCATION = "com.example.minimalisticweatherapp.LOCATION"
+        const val EXTRA_LOCATION = "com.minimalisticweatherapp.LOCATION"
     }
 
     // TODO Change app icon

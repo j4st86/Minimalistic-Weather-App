@@ -1,4 +1,4 @@
-package com.example.minimalisticweatherapp
+package com.minimalisticweatherapp
 
 import android.Manifest
 import android.content.Intent
@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.minimalisticweatherapp.model.LocationModel
+import com.minimalisticweatherapp.model.LocationModel
 import com.google.android.gms.location.LocationServices
 
 class LoadingActivity : AppCompatActivity() {

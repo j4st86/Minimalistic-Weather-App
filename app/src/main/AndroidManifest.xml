@@ -38,6 +38,9 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="com.openweather.API_KEY"
+            android:value="${OPEN_WEATHER_API_KEY}"/>
     </application>
 
 </manifest>

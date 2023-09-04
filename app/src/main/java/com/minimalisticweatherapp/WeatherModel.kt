@@ -17,7 +17,7 @@ class WeatherModel : WeatherMain.Model {
     ) {
         val call = retrofit.getWeather(
             latitude, longitude,
-            "4952f57884bddceab6b299e99f263f07", "metric", "en"
+            BuildConfig.OPEN_WEATHER_API_KEY, "metric", "en"
 
         )
         // TODO Replace API key to gradle strings

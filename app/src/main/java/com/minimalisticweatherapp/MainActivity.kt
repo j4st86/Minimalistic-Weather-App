@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         presenter.start()
     }
 
-    override fun showWeatherData(temperature: String, temperatureMax: String) {
-        tempTextView.text = temperature
-        anotherTempTextView.text = temperatureMax
+    override fun showWeatherData(temperatureCelsius: String, temperatureFahrenheit: String) {
+        tempTextView.text = temperatureCelsius
+        anotherTempTextView.text = temperatureFahrenheit
         weatherImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@MainActivity, R.drawable.ic_sneg
@@ -45,6 +45,4 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     companion object {
         const val EXTRA_LOCATION = "com.minimalisticweatherapp.LOCATION"
     }
-
-    // TODO Change app icon
 }

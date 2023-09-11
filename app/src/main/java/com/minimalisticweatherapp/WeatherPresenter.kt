@@ -9,16 +9,16 @@ class WeatherPresenter(
 ) : WeatherMain.Presenter {
     override fun start() {
         model.fetchWeatherData(
-            locationData.latitude,
-            locationData.longitude
+            locationData.userLocation
         ) { weatherResponse, error ->
             if (weatherResponse != null) {
-                val temperature = weatherResponse.mainWeatherData.temp
-                val temperatureMax = weatherResponse.mainWeatherData.tempMax
-                val temperatureMin = weatherResponse.mainWeatherData.tempMin
-                val description = weatherResponse.weather[0].description
+                val temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius
+                val temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit
 
-                view.showWeatherData(temperature.toString(), temperatureMax.toString())
+                view.showWeatherData(
+                    temperatureCelsius.toString(),
+                    temperatureFahrenheit.toString()
+                )
             } else {
                 view.showErrorMessage(error?.message ?: "Error")
             }

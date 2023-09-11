@@ -1,7 +1,7 @@
 package com.minimalisticweatherapp
 
-import com.minimalisticweatherapp.model.WeatherResponse
 import com.minimalisticweatherapp.retrofit.RetrofitClient
+import com.minimalisticweatherapp.retrofit.model.CurrentWeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,20 +11,17 @@ class WeatherModel : WeatherMain.Model {
     private val retrofit = RetrofitClient.retrofitAPI
 
     override fun fetchWeatherData(
-        latitude: String?,
-        longitude: String?,
-        callback: (WeatherResponse?, Throwable?) -> Unit
+        userLocation: String?,
+        callback: (CurrentWeatherResponse?, Throwable?) -> Unit
     ) {
-        val call = retrofit.getWeather(
-            latitude, longitude,
-            BuildConfig.OPEN_WEATHER_API_KEY, "metric", "en"
-
+        val call = retrofit.getCurrentWeather(
+            BuildConfig.WEATHER_API_KEY,
+            userLocation
         )
-        // TODO Replace API key to gradle strings
-        call.enqueue(object : Callback<WeatherResponse> {
+        call.enqueue(object : Callback<CurrentWeatherResponse> {
             override fun onResponse(
-                call: Call<WeatherResponse>,
-                response: Response<WeatherResponse>
+                call: Call<CurrentWeatherResponse>,
+                response: Response<CurrentWeatherResponse>
             ) {
                 if (response.isSuccessful) {
                     val weatherResponse = response.body()
@@ -34,7 +31,7 @@ class WeatherModel : WeatherMain.Model {
                 }
             }
 
-            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+            override fun onFailure(call: Call<CurrentWeatherResponse>, t: Throwable) {
                 callback(null, t)
             }
         })

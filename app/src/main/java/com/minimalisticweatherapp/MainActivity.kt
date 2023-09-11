@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         anotherTempTextView.text = temperatureFahrenheit
         weatherImageView.setImageDrawable(
             AppCompatResources.getDrawable(
-                this@MainActivity, R.drawable.ic_sneg
+                this@MainActivity, R.drawable.ic_sun_cloudy
             )
         )
     }

@@ -20,7 +20,7 @@ class WeatherPresenter(
                     temperatureFahrenheit.toString()
                 )
             } else {
-                view.showErrorMessage(error?.message ?: "Error")
+                view.showErrorMessage(error?.message ?: "Error?????")
             }
         }
     }

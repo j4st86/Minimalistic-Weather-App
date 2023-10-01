@@ -12,12 +12,10 @@ class WeatherPresenter(
             locationData.userLocation
         ) { weatherResponse, error ->
             if (weatherResponse != null) {
-                val temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius
-                val temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit
 
                 view.showWeatherData(
-                    temperatureCelsius.toString(),
-                    temperatureFahrenheit.toString()
+                    temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toString(),
+                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toString()
                 )
             } else {
                 view.showErrorMessage(error?.message ?: "Error?????")

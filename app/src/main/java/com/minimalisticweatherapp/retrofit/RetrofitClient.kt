@@ -9,7 +9,7 @@ private var BASE_URL: String = "http://api.weatherapi.com/v1/"
 
 object RetrofitClient {
     private fun createInterceptor(): HttpLoggingInterceptor {
-        val interceptor: HttpLoggingInterceptor = HttpLoggingInterceptor()
+        val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         return interceptor
     }

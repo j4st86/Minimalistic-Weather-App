@@ -23,6 +23,8 @@ data class CurrentWeatherData(
     val windCurrentSpeedMph: Double,
     @SerializedName("wind_kph")
     val windCurrentSpeedKph: Double,
+    @SerializedName("is_day")
+    val isDayCode: Int,
     @SerializedName("condition")
     val weatherCurrentCondition: CurrentWeatherCondition,
 )

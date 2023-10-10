@@ -4,7 +4,12 @@ import com.minimalisticweatherapp.retrofit.model.CurrentWeatherResponse
 
 interface WeatherMain {
     interface View {
-        fun showWeatherData(temperatureCelsius: String, temperatureFahrenheit: String)
+        fun showWeatherData(
+            temperatureCelsius: String,
+            temperatureFahrenheit: String,
+            weatherIcon: Int
+        )
+
         fun showErrorMessage(message: String)
     }
 

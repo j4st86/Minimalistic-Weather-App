@@ -20,7 +20,8 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         setContentView(R.layout.activity_main)
 
         val locationData =
-            intent.getParcelableExtra<LocationModel>(EXTRA_LOCATION) ?: throw Exception("error")
+            intent.getParcelableExtra<LocationModel>(EXTRA_LOCATION)
+                ?: throw Exception("Error: Can't get position data or no last known location data")
 
         val model = WeatherModel()
         presenter = WeatherPresenter(this, model, locationData)
@@ -28,12 +29,16 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         presenter.start()
     }
 
-    override fun showWeatherData(temperatureCelsius: String, temperatureFahrenheit: String) {
+    override fun showWeatherData(
+        temperatureCelsius: String,
+        temperatureFahrenheit: String,
+        weatherIcon: Int
+    ) {
         tempTextView.text = temperatureCelsius
         anotherTempTextView.text = temperatureFahrenheit
         weatherImageView.setImageDrawable(
             AppCompatResources.getDrawable(
-                this@MainActivity, R.drawable.ic_sun_cloudy
+                this@MainActivity, weatherIcon
             )
         )
     }

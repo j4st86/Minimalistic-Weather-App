@@ -1,5 +1,6 @@
 package com.minimalisticweatherapp
 
+import com.minimalisticweatherapp.extensions.weatherIconByCode
 import com.minimalisticweatherapp.model.LocationModel
 
 class WeatherPresenter(
@@ -15,7 +16,11 @@ class WeatherPresenter(
 
                 view.showWeatherData(
                     temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toString(),
-                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toString()
+                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toString(),
+                    weatherIcon = weatherIconByCode(
+                        weatherResponse.weatherCurrentData.weatherCurrentCondition.weatherConditionCode,
+                        weatherResponse.weatherCurrentData.isDayCode
+                    )
                 )
             } else {
                 view.showErrorMessage(error?.message ?: "Error?????")

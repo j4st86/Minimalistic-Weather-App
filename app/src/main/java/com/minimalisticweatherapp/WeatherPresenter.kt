@@ -13,7 +13,6 @@ class WeatherPresenter(
             locationData.userLocation
         ) { weatherResponse, error ->
             if (weatherResponse != null) {
-
                 view.showWeatherData(
                     temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toString(),
                     temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toString(),
@@ -23,7 +22,7 @@ class WeatherPresenter(
                     )
                 )
             } else {
-                view.showErrorMessage(error?.message ?: "Error?????")
+                view.showErrorMessage(error?.message ?: "Failed to retrieve weather data")
             }
         }
     }

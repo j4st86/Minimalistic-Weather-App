@@ -55,8 +55,12 @@ class LoadingActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getCurrentLocation()
             } else {
-                Toast.makeText(this,"Give GPS permission",Toast.LENGTH_LONG).show()
-                finish()
+                Toast.makeText(
+                    this,
+                    "GPS permission was not obtained, so the default location was exposed",
+                    Toast.LENGTH_LONG
+                ).show()
+                navigateToMainActivityDefaultLocation()
             }
         }
     }
@@ -68,8 +72,12 @@ class LoadingActivity : AppCompatActivity() {
             if (location != null) {
                 navigateToMainActivity(location)
             } else {
-                // TODO Handle error (location = null)
-                finish()
+                Toast.makeText(
+                    this,
+                    "Failed to retrieve last location, so the default location was exposed",
+                    Toast.LENGTH_LONG
+                ).show()
+                navigateToMainActivityDefaultLocation()
             }
         }
     }
@@ -79,6 +87,16 @@ class LoadingActivity : AppCompatActivity() {
         intent.putExtra(
             MainActivity.EXTRA_LOCATION,
             LocationModel(location.latitude.toString(), location.longitude.toString())
+        )
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToMainActivityDefaultLocation() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(
+            MainActivity.EXTRA_LOCATION,
+            LocationModel("55.7510", "37.6176")
         )
         startActivity(intent)
         finish()

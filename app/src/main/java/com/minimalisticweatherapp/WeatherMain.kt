@@ -1,6 +1,6 @@
 package com.minimalisticweatherapp
 
-import com.minimalisticweatherapp.retrofit.model.CurrentWeatherResponse
+import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 
 interface WeatherMain {
     interface View {
@@ -20,7 +20,7 @@ interface WeatherMain {
     interface Model {
         fun fetchWeatherData(
             userLocation: String?,
-            callback: (CurrentWeatherResponse?, Throwable?) -> Unit
+            callback: (WeatherResponse?, Throwable?) -> Unit
         )
     }
 }

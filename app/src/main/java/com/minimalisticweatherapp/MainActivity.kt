@@ -1,6 +1,7 @@
 package com.minimalisticweatherapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     }
 
     override fun showErrorMessage(message: String) {
-        //TODO Display Error
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     companion object {

@@ -35,7 +35,7 @@ fun weatherIconByCode(weatherConditionCode: Int, isDayCode: Int): Int {
         1237, 1261, 1264 -> R.drawable.ic_pellets
         1276 -> R.drawable.ic_cloudy_thunder
         else -> {
-            R.drawable.ic_launcher_foreground //TODO mean no image for a such code
+            R.drawable.ic_no_image
         }
     }
 }

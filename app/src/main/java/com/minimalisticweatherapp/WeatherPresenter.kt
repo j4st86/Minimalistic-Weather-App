@@ -13,9 +13,9 @@ class WeatherPresenter(
             locationData.userLocation
         ) { weatherResponse, error ->
             if (weatherResponse != null) {
-                view.showWeatherData(
-                    temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toString(),
-                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toString(),
+                view.showCurrentWeatherData(
+                    temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt().toString() + "°",
+                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toInt().toString(),
                     weatherIcon = weatherIconByCode(
                         weatherResponse.weatherCurrentData.weatherCurrentCondition.weatherConditionCode,
                         weatherResponse.weatherCurrentData.isDayCode

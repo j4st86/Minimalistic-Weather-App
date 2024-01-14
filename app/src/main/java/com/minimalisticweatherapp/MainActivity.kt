@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         presenter.start()
     }
 
-    override fun showWeatherData(
+    override fun showCurrentWeatherData(
         temperatureCelsius: String,
         temperatureFahrenheit: String,
         weatherIcon: Int

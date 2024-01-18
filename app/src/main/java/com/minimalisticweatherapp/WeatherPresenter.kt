@@ -9,13 +9,19 @@ class WeatherPresenter(
     private val locationData: LocationModel
 ) : WeatherMain.Presenter {
     override fun start() {
+        view.showMainImages(
+            settingIcon = R.drawable.ic_settings
+        )
+
         model.fetchWeatherData(
             locationData.userLocation
         ) { weatherResponse, error ->
             if (weatherResponse != null) {
                 view.showCurrentWeatherData(
-                    temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt().toString() + "°",
-                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toInt().toString(),
+                    temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt()
+                        .toString() + "°",
+                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toInt()
+                        .toString(),
                     weatherIcon = weatherIconByCode(
                         weatherResponse.weatherCurrentData.weatherCurrentCondition.weatherConditionCode,
                         weatherResponse.weatherCurrentData.isDayCode

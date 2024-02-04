@@ -37,3 +37,5 @@ class WeatherModel : WeatherMain.Model {
         })
     }
 }
+
+//TODO Result API

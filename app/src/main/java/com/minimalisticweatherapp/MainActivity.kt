@@ -3,6 +3,7 @@ package com.minimalisticweatherapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
@@ -11,12 +12,12 @@ import com.minimalisticweatherapp.model.LocationModel
 
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 
-    private val settingsImageView: AppCompatImageView by lazy { findViewById(R.id.settings_iv) }
+    private val settingsImageView: AppCompatImageView by lazy { findViewById(R.id.settings_iv) } //TODO bez lazy
     private val weatherImageView: AppCompatImageView by lazy { findViewById(R.id.weather_iv) }
     private val tempTextView: AppCompatTextView by lazy { findViewById(R.id.temp_tv) }
     private val anotherTempTextView: AppCompatTextView by lazy { findViewById(R.id.another_temp_tv) }
 
-    private lateinit var presenter: WeatherMain.Presenter
+    private lateinit var presenter: WeatherMain.Presenter //TODO bez lateinit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     override fun showCurrentWeatherData(
         temperatureCelsius: String,
         temperatureFahrenheit: String,
+        @DrawableRes
         weatherIcon: Int
     ) {
         tempTextView.text = temperatureCelsius

@@ -24,7 +24,7 @@ interface LoadingMain {
     }
 }
 
-interface WeatherMain {
+interface WeatherMain { //TODO pereimenovat
     interface View {
         fun showCurrentWeatherData(
             temperatureCelsius: String,
@@ -32,7 +32,7 @@ interface WeatherMain {
             weatherIcon: Int
         )
 
-        fun showMainImages(
+        fun showMainImages( //TODO ybrat' sdelat topbar (ili XML)
             settingIcon: Int
         )
 

@@ -9,7 +9,7 @@ class WeatherPresenter(
     private val locationData: LocationModel
 ) : WeatherMain.Presenter {
     override fun start() {
-        view.showMainImages(
+        view.showMainImages( //TODO ybrat
             settingIcon = R.drawable.ic_settings
         )
 

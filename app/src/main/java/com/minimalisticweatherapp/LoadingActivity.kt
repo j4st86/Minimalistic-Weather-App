@@ -84,6 +84,7 @@ class LoadingActivity : AppCompatActivity() {
 
     private fun navigateToMainActivity(location: Location) {
         val intent = Intent(this, MainActivity::class.java)
+
         intent.putExtra(
             MainActivity.EXTRA_LOCATION,
             LocationModel(location.latitude.toString(), location.longitude.toString())

@@ -6,7 +6,7 @@ class SettingsPresenter(
 ) : SettingsMain.Presenter {
     override fun start() {
         view.showInterface(
-            backImage = R.drawable.ic_settings,
+            backImage = R.drawable.ic_back,
             activityName = "Settings"
         )
     }

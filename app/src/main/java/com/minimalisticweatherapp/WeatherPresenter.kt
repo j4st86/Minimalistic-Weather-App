@@ -9,8 +9,10 @@ class WeatherPresenter(
     private val locationData: LocationModel
 ) : WeatherMain.Presenter {
     override fun start() {
-        view.showMainImages( //TODO ybrat
-            settingIcon = R.drawable.ic_settings
+        view.showMainImages(
+            settingIcon = R.drawable.ic_settings,
+            maxTempIcon = R.drawable.ic_max_temp,
+            minTempIcon = R.drawable.ic_min_temp
         )
 
         model.fetchWeatherData(
@@ -18,10 +20,9 @@ class WeatherPresenter(
         ) { weatherResponse, error ->
             if (weatherResponse != null) {
                 view.showCurrentWeatherData(
-                    temperatureCelsius = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt()
+                    cityName = weatherResponse.weatherLocationData.cityName,
+                    temperatureCurrent = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt()
                         .toString() + "°",
-                    temperatureFahrenheit = weatherResponse.weatherCurrentData.tempCurrentFahrenheit.toInt()
-                        .toString(),
                     weatherIcon = weatherIconByCode(
                         weatherResponse.weatherCurrentData.weatherCurrentCondition.weatherConditionCode,
                         weatherResponse.weatherCurrentData.isDayCode

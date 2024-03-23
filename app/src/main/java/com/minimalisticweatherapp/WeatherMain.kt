@@ -1,39 +1,19 @@
 package com.minimalisticweatherapp
 
-import android.location.Location
 import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 
-interface LoadingMain {
-    interface View {
-        fun navigateToMainActivity(location: Location)
-        fun requestLocationPermission()
-        fun finishActivity()
-    }
-
-    interface Presenter {
-        fun start()
-        fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
-        )
-    }
-
-    interface Model {
-        fun getCurrentLocation()
-    }
-}
-
-interface WeatherMain { //TODO pereimenovat
+interface WeatherMain {
     interface View {
         fun showCurrentWeatherData(
-            temperatureCelsius: String,
-            temperatureFahrenheit: String,
+            cityName: String,
+            temperatureCurrent: String,
             weatherIcon: Int
         )
 
-        fun showMainImages( //TODO ybrat' sdelat topbar (ili XML)
-            settingIcon: Int
+        fun showMainImages(
+            settingIcon: Int,
+            maxTempIcon: Int,
+            minTempIcon: Int
         )
 
         fun showErrorMessage(message: String)

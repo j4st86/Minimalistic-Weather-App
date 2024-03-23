@@ -12,12 +12,16 @@ import com.minimalisticweatherapp.model.LocationModel
 
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 
-    private val settingsImageView: AppCompatImageView by lazy { findViewById(R.id.settings_iv) } //TODO bez lazy
+    private val settingsImageView: AppCompatImageView by lazy { findViewById(R.id.settings_iv) }
     private val weatherImageView: AppCompatImageView by lazy { findViewById(R.id.weather_iv) }
     private val tempTextView: AppCompatTextView by lazy { findViewById(R.id.temp_tv) }
-    private val anotherTempTextView: AppCompatTextView by lazy { findViewById(R.id.another_temp_tv) }
+    private val cityTextView: AppCompatTextView by lazy { findViewById(R.id.city_name_tv) }
+    private val maxTempImageView: AppCompatImageView by lazy { findViewById(R.id.max_temp_iv) }
+    private val minTempImageView: AppCompatImageView by lazy { findViewById(R.id.min_temp_iv) }
+    private val maxTempTextView: AppCompatTextView by lazy { findViewById(R.id.max_temp_tv) }
+    private val minTempTextView: AppCompatTextView by lazy { findViewById(R.id.min_temp_tv) }
 
-    private lateinit var presenter: WeatherMain.Presenter //TODO bez lateinit
+    private lateinit var presenter: WeatherMain.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,20 +36,20 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
 
         presenter.start()
 
-        settingsImageView.setOnClickListener{
+        settingsImageView.setOnClickListener {
             intent = Intent(applicationContext, SettingsActivity::class.java)
             startActivity(intent)
         }
     }
 
     override fun showCurrentWeatherData(
-        temperatureCelsius: String,
-        temperatureFahrenheit: String,
+        cityName: String,
+        temperatureCurrent: String,
         @DrawableRes
         weatherIcon: Int
     ) {
-        tempTextView.text = temperatureCelsius
-        anotherTempTextView.text = temperatureFahrenheit
+        cityTextView.text = cityName
+        tempTextView.text = temperatureCurrent
         weatherImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@MainActivity, weatherIcon
@@ -53,10 +57,22 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         )
     }
 
-    override fun showMainImages(settingIcon: Int) {
+    override fun showMainImages(settingIcon: Int, maxTempIcon: Int, minTempIcon: Int) {
         settingsImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@MainActivity, settingIcon
+            )
+        )
+        maxTempImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                maxTempIcon
+            )
+        )
+        minTempImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                minTempIcon
             )
         )
     }

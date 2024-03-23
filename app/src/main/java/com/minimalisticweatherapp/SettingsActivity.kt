@@ -1,6 +1,5 @@
 package com.minimalisticweatherapp
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
@@ -16,14 +15,13 @@ class SettingsActivity : AppCompatActivity(), SettingsMain.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val model =
+        val model = SettingsModel()
         presenter = SettingsPresenter(this, model)
 
         presenter.start()
 
         backImageView.setOnClickListener {
-            intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
     }
 

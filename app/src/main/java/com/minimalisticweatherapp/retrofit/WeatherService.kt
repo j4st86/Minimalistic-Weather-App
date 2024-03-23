@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherService { //TODO peredelat'
+interface WeatherService {
     @GET("forecast.json?")
     fun getCurrentWeather(
         @Query("key") key: String,

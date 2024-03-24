@@ -25,6 +25,12 @@ data class CurrentWeatherData(
     val windCurrentSpeedMph: Double,
     @SerializedName("wind_kph")
     val windCurrentSpeedKph: Double,
+    @SerializedName("wind_dir")
+    val windDirection: String,
+    @SerializedName("pressure_mb")
+    val pressureCurrent: Double,
+    @SerializedName("humidity")
+    val humidityCurrent: Int,
     @SerializedName("is_day")
     val isDayCode: Int,
     @SerializedName("condition")
@@ -56,13 +62,13 @@ data class ForecastDayData(
 
 data class DayWeatherData(
     @SerializedName("maxtemp_c")
-    val maximalDayTempCelsius: Double,
+    val maximumDayTempCelsius: Double,
     @SerializedName("maxtemp_f")
     val maximumDayTempFahrenheit: Double,
     @SerializedName("mintemp_c")
-    val minimalDayTempCelsius: Double,
+    val minimumDayTempCelsius: Double,
     @SerializedName("mintemp_f")
-    val minimalDayTempFahrenheit: Double,
+    val minimumDayTempFahrenheit: Double,
     @SerializedName("avgtemp_c")
     val averageDayTempCelsius: Double,
     @SerializedName("avgtemp_f")

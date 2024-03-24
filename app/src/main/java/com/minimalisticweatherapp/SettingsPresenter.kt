@@ -7,7 +7,7 @@ class SettingsPresenter(
     override fun start() {
         view.showInterface(
             backImage = R.drawable.ic_back,
-            activityName = "Settings"
+            activityName = "Настройки"
         )
     }
 }

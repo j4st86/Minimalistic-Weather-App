@@ -1,5 +1,6 @@
 package com.minimalisticweatherapp
 
+import com.minimalisticweatherapp.extensions.directionTranslate
 import com.minimalisticweatherapp.extensions.weatherIconByCode
 import com.minimalisticweatherapp.model.LocationModel
 
@@ -12,7 +13,10 @@ class WeatherPresenter(
         view.showMainImages(
             settingIcon = R.drawable.ic_settings,
             maxTempIcon = R.drawable.ic_max_temp,
-            minTempIcon = R.drawable.ic_min_temp
+            minTempIcon = R.drawable.ic_min_temp,
+            windSpeedIcon = R.drawable.ic_wind,
+            pressureIcon = R.drawable.ic_pressure,
+            humidityIcon = R.drawable.ic_humidity
         )
 
         model.fetchWeatherData(
@@ -23,6 +27,15 @@ class WeatherPresenter(
                     cityName = weatherResponse.weatherLocationData.cityName,
                     temperatureCurrent = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt()
                         .toString() + "°",
+                    temperatureMaximum = weatherResponse.weatherForecastData.forecastDayData[0].dayWeatherData.maximumDayTempCelsius.toInt()
+                        .toString() + "°",
+                    temperatureMinimum = weatherResponse.weatherForecastData.forecastDayData[0].dayWeatherData.minimumDayTempCelsius.toInt()
+                        .toString() + "°",
+                    windSpeedCurrent = (weatherResponse.weatherCurrentData.windCurrentSpeedMph * 0.278).toInt()
+                        .toString() + " мс, " + directionTranslate(weatherResponse.weatherCurrentData.windDirection),
+                    pressureCurrent = (weatherResponse.weatherCurrentData.pressureCurrent * 0.7501).toInt()
+                        .toString() + " мм. рт. ст.",
+                    humidityCurrent = weatherResponse.weatherCurrentData.humidityCurrent.toString() + " %",
                     weatherIcon = weatherIconByCode(
                         weatherResponse.weatherCurrentData.weatherCurrentCondition.weatherConditionCode,
                         weatherResponse.weatherCurrentData.isDayCode

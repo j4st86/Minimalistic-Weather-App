@@ -7,13 +7,21 @@ interface WeatherMain {
         fun showCurrentWeatherData(
             cityName: String,
             temperatureCurrent: String,
+            temperatureMaximum: String,
+            temperatureMinimum: String,
+            windSpeedCurrent: String,
+            pressureCurrent: String,
+            humidityCurrent: String,
             weatherIcon: Int
         )
 
         fun showMainImages(
             settingIcon: Int,
             maxTempIcon: Int,
-            minTempIcon: Int
+            minTempIcon: Int,
+            windSpeedIcon: Int,
+            pressureIcon: Int,
+            humidityIcon: Int
         )
 
         fun showErrorMessage(message: String)

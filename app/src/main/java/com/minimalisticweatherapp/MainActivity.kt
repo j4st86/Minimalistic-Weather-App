@@ -13,13 +13,21 @@ import com.minimalisticweatherapp.model.LocationModel
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 
     private val settingsImageView: AppCompatImageView by lazy { findViewById(R.id.settings_iv) }
+    private val cityTextView: AppCompatTextView by lazy { findViewById(R.id.city_name_tv) }
+
     private val weatherImageView: AppCompatImageView by lazy { findViewById(R.id.weather_iv) }
     private val tempTextView: AppCompatTextView by lazy { findViewById(R.id.temp_tv) }
-    private val cityTextView: AppCompatTextView by lazy { findViewById(R.id.city_name_tv) }
     private val maxTempImageView: AppCompatImageView by lazy { findViewById(R.id.max_temp_iv) }
     private val minTempImageView: AppCompatImageView by lazy { findViewById(R.id.min_temp_iv) }
     private val maxTempTextView: AppCompatTextView by lazy { findViewById(R.id.max_temp_tv) }
     private val minTempTextView: AppCompatTextView by lazy { findViewById(R.id.min_temp_tv) }
+
+    private val windSpeedImageView: AppCompatImageView by lazy { findViewById(R.id.wind_speed_iv) }
+    private val pressureImageView: AppCompatImageView by lazy { findViewById(R.id.pressure_iv) }
+    private val humidityImageView: AppCompatImageView by lazy { findViewById(R.id.humidity_iv) }
+    private val windSpeedTextView: AppCompatTextView by lazy { findViewById(R.id.wind_speed_tv) }
+    private val pressureTextView: AppCompatTextView by lazy { findViewById(R.id.pressure_tv) }
+    private val humidityTextView: AppCompatTextView by lazy { findViewById(R.id.humidity_tv) }
 
     private lateinit var presenter: WeatherMain.Presenter
 
@@ -45,11 +53,21 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     override fun showCurrentWeatherData(
         cityName: String,
         temperatureCurrent: String,
+        temperatureMaximum: String,
+        temperatureMinimum: String,
+        windSpeedCurrent: String,
+        pressureCurrent: String,
+        humidityCurrent: String,
         @DrawableRes
         weatherIcon: Int
     ) {
         cityTextView.text = cityName
         tempTextView.text = temperatureCurrent
+        maxTempTextView.text = temperatureMaximum
+        minTempTextView.text = temperatureMinimum
+        windSpeedTextView.text = windSpeedCurrent
+        pressureTextView.text = pressureCurrent
+        humidityTextView.text = humidityCurrent
         weatherImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@MainActivity, weatherIcon
@@ -57,7 +75,14 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         )
     }
 
-    override fun showMainImages(settingIcon: Int, maxTempIcon: Int, minTempIcon: Int) {
+    override fun showMainImages(
+        settingIcon: Int,
+        maxTempIcon: Int,
+        minTempIcon: Int,
+        windSpeedIcon: Int,
+        pressureIcon: Int,
+        humidityIcon: Int
+    ) {
         settingsImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@MainActivity, settingIcon
@@ -73,6 +98,24 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
             AppCompatResources.getDrawable(
                 this@MainActivity,
                 minTempIcon
+            )
+        )
+        windSpeedImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                windSpeedIcon
+            )
+        )
+        pressureImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                pressureIcon
+            )
+        )
+        humidityImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                humidityIcon
             )
         )
     }

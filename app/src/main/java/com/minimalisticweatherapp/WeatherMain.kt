@@ -1,5 +1,6 @@
 package com.minimalisticweatherapp
 
+import com.minimalisticweatherapp.retrofit.model.ForecastResponse
 import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 
 interface WeatherMain {
@@ -35,6 +36,10 @@ interface WeatherMain {
         fun fetchWeatherData(
             userLocation: String?,
             callback: (WeatherResponse?, Throwable?) -> Unit
+        )
+        fun fetchForecastData(
+            userLocation: String?,
+            callback: (ForecastResponse?, Throwable?) -> Unit
         )
     }
 }

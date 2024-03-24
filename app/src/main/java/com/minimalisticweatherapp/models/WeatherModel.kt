@@ -3,6 +3,7 @@ package com.minimalisticweatherapp.models
 import com.minimalisticweatherapp.BuildConfig
 import com.minimalisticweatherapp.WeatherMain
 import com.minimalisticweatherapp.retrofit.RetrofitClient
+import com.minimalisticweatherapp.retrofit.model.ForecastResponse
 import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,13 +11,14 @@ import retrofit2.Response
 
 class WeatherModel : WeatherMain.Model {
 
-    private val retrofit = RetrofitClient.retrofitAPI
+    private val retrofitCurrent = RetrofitClient.retrofitWeatherAPI
+    private val retrofitForecast = RetrofitClient.retrofitForecastAPI
 
     override fun fetchWeatherData(
         userLocation: String?,
         callback: (WeatherResponse?, Throwable?) -> Unit
     ) {
-        val call = retrofit.getCurrentWeather(
+        val call = retrofitCurrent.getCurrentWeather(
             BuildConfig.WEATHER_API_KEY,
             userLocation
         )
@@ -34,6 +36,32 @@ class WeatherModel : WeatherMain.Model {
             }
 
             override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                callback(null, t)
+            }
+        })
+    }
+
+    override fun fetchForecastData(
+        userLocation: String?,
+        callback: (ForecastResponse?, Throwable?) -> Unit
+    ) {
+        val call = retrofitForecast.getForecastWeather(
+            userLocation
+        )
+        call.enqueue(object : Callback<ForecastResponse> {
+            override fun onResponse(
+                call: Call<ForecastResponse>,
+                response: Response<ForecastResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val forecastResponse = response.body()
+                    callback(forecastResponse, null)
+                } else {
+                    callback(null, Exception("Error: Weather request failed"))
+                }
+            }
+
+            override fun onFailure(call: Call<ForecastResponse>, t: Throwable) {
                 callback(null, t)
             }
         })

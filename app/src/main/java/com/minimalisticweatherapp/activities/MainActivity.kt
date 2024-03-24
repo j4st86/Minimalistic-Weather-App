@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.appcompat.widget.AppCompatTextView
 import com.minimalisticweatherapp.R
 import com.minimalisticweatherapp.WeatherMain
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     private val windSpeedTextView: AppCompatTextView by lazy { findViewById(R.id.wind_speed_tv) }
     private val pressureTextView: AppCompatTextView by lazy { findViewById(R.id.pressure_tv) }
     private val humidityTextView: AppCompatTextView by lazy { findViewById(R.id.humidity_tv) }
+
+    private val dayTimeImageView: AppCompatImageView by lazy { findViewById(R.id.daytime_iv) }
+    private val nightTimeImageView: AppCompatImageView by lazy { findViewById(R.id.nighttime_iv) }
+    private val sliderSeekBar: AppCompatSeekBar by lazy { findViewById(R.id.time_change_sb) }
 
     private lateinit var presenter: WeatherMain.Presenter
     //TODO добавить слайдер после температуры (можно пока не рабочий)
@@ -89,7 +94,9 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         minTempIcon: Int,
         windSpeedIcon: Int,
         pressureIcon: Int,
-        humidityIcon: Int
+        humidityIcon: Int,
+        dayTimeIcon: Int,
+        nightTimeIcon: Int
     ) {
         settingsImageView.setImageDrawable(
             AppCompatResources.getDrawable(
@@ -124,6 +131,18 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
             AppCompatResources.getDrawable(
                 this@MainActivity,
                 humidityIcon
+            )
+        )
+        dayTimeImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                dayTimeIcon
+            )
+        )
+        nightTimeImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity,
+                nightTimeIcon
             )
         )
     }

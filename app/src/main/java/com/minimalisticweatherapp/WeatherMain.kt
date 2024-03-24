@@ -25,7 +25,9 @@ interface WeatherMain {
             minTempIcon: Int,
             windSpeedIcon: Int,
             pressureIcon: Int,
-            humidityIcon: Int
+            humidityIcon: Int,
+            dayTimeIcon: Int,
+            nightTimeIcon: Int
         )
 
         fun showErrorMessage(message: String)

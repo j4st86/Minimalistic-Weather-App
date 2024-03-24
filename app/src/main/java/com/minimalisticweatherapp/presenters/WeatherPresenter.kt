@@ -18,7 +18,9 @@ class WeatherPresenter(
             minTempIcon = R.drawable.ic_min_temp,
             windSpeedIcon = R.drawable.ic_wind,
             pressureIcon = R.drawable.ic_pressure,
-            humidityIcon = R.drawable.ic_humidity
+            humidityIcon = R.drawable.ic_humidity,
+            dayTimeIcon = R.drawable.ic_daytime,
+            nightTimeIcon = R.drawable.ic_nighttime
         )
 
         model.fetchWeatherData(

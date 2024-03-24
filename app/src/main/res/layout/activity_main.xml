@@ -186,7 +186,68 @@
             tools:src="@drawable/ic_humidity">
 
         </ImageView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/seekbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temps_layout">
+
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="время 16:00">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/daytime_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/time_change_sb"
+            app:layout_constraintEnd_toStartOf="@+id/time_change_sb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/time_change_sb"
+            tools:src="@drawable/ic_daytime">
+
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/nighttime_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/time_change_sb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/time_change_sb"
+            app:layout_constraintTop_toTopOf="@+id/time_change_sb"
+            tools:src="@drawable/ic_nighttime">
+
+        </ImageView>
+
+        <SeekBar
+            android:id="@+id/time_change_sb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:max="23"
+            android:minWidth="250dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_tv"
+            tools:progress="16">
+
+        </SeekBar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

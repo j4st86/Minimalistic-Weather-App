@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     override fun showCurrentWeatherData(
         cityName: String,
         temperatureCurrent: String,
-        temperatureMaximum: String,
-        temperatureMinimum: String,
         windSpeedCurrent: String,
         pressureCurrent: String,
         humidityCurrent: String,
@@ -67,8 +65,6 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     ) {
         cityTextView.text = cityName
         tempTextView.text = temperatureCurrent
-        maxTempTextView.text = temperatureMaximum
-        minTempTextView.text = temperatureMinimum
         windSpeedTextView.text = windSpeedCurrent
         pressureTextView.text = pressureCurrent
         humidityTextView.text = humidityCurrent
@@ -77,6 +73,14 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
                 this@MainActivity, weatherIcon
             )
         )
+    }
+
+    override fun showForecastWeatherData(
+        temperatureMaximum: String,
+        temperatureMinimum: String
+    ) {
+        maxTempTextView.text = temperatureMaximum
+        minTempTextView.text = temperatureMinimum
     }
 
     override fun showMainImages(

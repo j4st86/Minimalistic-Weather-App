@@ -18,7 +18,8 @@ interface WeatherService {
 interface ForecastService {
     @GET("forecast?")
     fun getForecastWeather(
-        @Query("q") location: String?,
+        @Query("latitude") latitude: String?,
+        @Query("longitude") longitude: String?,
         @Query("daily") daily: String = "temperature_2m_max,temperature_2m_min",
         @Query("timezone") timezone: String = "GMT",
         @Query("forecast_days") forecastDays: String = "14"

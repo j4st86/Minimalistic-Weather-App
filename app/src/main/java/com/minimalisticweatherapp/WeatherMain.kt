@@ -8,12 +8,15 @@ interface WeatherMain {
         fun showCurrentWeatherData(
             cityName: String,
             temperatureCurrent: String,
-            temperatureMaximum: String,
-            temperatureMinimum: String,
             windSpeedCurrent: String,
             pressureCurrent: String,
             humidityCurrent: String,
             weatherIcon: Int
+        )
+
+        fun showForecastWeatherData(
+            temperatureMaximum: String,
+            temperatureMinimum: String
         )
 
         fun showMainImages(
@@ -37,8 +40,10 @@ interface WeatherMain {
             userLocation: String?,
             callback: (WeatherResponse?, Throwable?) -> Unit
         )
+
         fun fetchForecastData(
-            userLocation: String?,
+            latitude: String?,
+            longitude: String?,
             callback: (ForecastResponse?, Throwable?) -> Unit
         )
     }

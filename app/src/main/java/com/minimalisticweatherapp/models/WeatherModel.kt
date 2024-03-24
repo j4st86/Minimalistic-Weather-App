@@ -42,11 +42,11 @@ class WeatherModel : WeatherMain.Model {
     }
 
     override fun fetchForecastData(
-        userLocation: String?,
+        latitude: String?, longitude: String?,
         callback: (ForecastResponse?, Throwable?) -> Unit
     ) {
         val call = retrofitForecast.getForecastWeather(
-            userLocation
+            latitude, longitude
         )
         call.enqueue(object : Callback<ForecastResponse> {
             override fun onResponse(
@@ -57,7 +57,7 @@ class WeatherModel : WeatherMain.Model {
                     val forecastResponse = response.body()
                     callback(forecastResponse, null)
                 } else {
-                    callback(null, Exception("Error: Weather request failed"))
+                    callback(null, Exception("Error: Forecast request failed"))
                 }
             }
 

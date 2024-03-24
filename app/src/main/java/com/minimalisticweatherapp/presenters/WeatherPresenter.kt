@@ -29,10 +29,6 @@ class WeatherPresenter(
                     cityName = weatherResponse.weatherLocationData.cityName,
                     temperatureCurrent = weatherResponse.weatherCurrentData.tempCurrentCelsius.toInt()
                         .toString() + "°",
-                    temperatureMaximum = weatherResponse.weatherForecastData.forecastDayData[0].dayWeatherData.maximumDayTempCelsius.toInt()
-                        .toString() + "°",
-                    temperatureMinimum = weatherResponse.weatherForecastData.forecastDayData[0].dayWeatherData.minimumDayTempCelsius.toInt()
-                        .toString() + "°",
                     windSpeedCurrent = (weatherResponse.weatherCurrentData.windCurrentSpeedMph * 0.278).toInt()
                         .toString() + " мс, " + directionTranslate(weatherResponse.weatherCurrentData.windDirection),
                     pressureCurrent = (weatherResponse.weatherCurrentData.pressureCurrent * 0.7501).toInt()
@@ -45,6 +41,21 @@ class WeatherPresenter(
                 )
             } else {
                 view.showErrorMessage(error?.message ?: "Failed to retrieve weather data")
+            }
+        }
+
+        model.fetchForecastData(
+            locationData.latitude, locationData.longitude
+        ) { forecastResponse, error ->
+            if (forecastResponse != null) {
+                view.showForecastWeatherData(
+                    temperatureMaximum = forecastResponse.dailyForecastData.dailyMaxTemp[0].toInt()
+                        .toString() + "°",
+                    temperatureMinimum = forecastResponse.dailyForecastData.dailyMinTemp[0].toInt()
+                        .toString() + "°"
+                )
+            } else {
+                view.showErrorMessage(error?.message ?: "Failed to retrieve forecast data")
             }
         }
     }

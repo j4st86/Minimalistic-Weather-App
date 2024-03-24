@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     private val humidityTextView: AppCompatTextView by lazy { findViewById(R.id.humidity_tv) }
 
     private lateinit var presenter: WeatherMain.Presenter
-
+    //TODO добавить слайдер после температуры (можно пока не рабочий)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

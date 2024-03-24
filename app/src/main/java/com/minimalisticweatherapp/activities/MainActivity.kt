@@ -1,4 +1,4 @@
-package com.minimalisticweatherapp
+package com.minimalisticweatherapp.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
-import com.minimalisticweatherapp.model.LocationModel
+import com.minimalisticweatherapp.R
+import com.minimalisticweatherapp.WeatherMain
+import com.minimalisticweatherapp.models.WeatherModel
+import com.minimalisticweatherapp.presenters.WeatherPresenter
+import com.minimalisticweatherapp.retrofit.LocationModel
 
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 

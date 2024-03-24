@@ -1,4 +1,4 @@
-package com.minimalisticweatherapp.model
+package com.minimalisticweatherapp.retrofit
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

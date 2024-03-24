@@ -1,4 +1,7 @@
-package com.minimalisticweatherapp
+package com.minimalisticweatherapp.presenters
+
+import com.minimalisticweatherapp.R
+import com.minimalisticweatherapp.SettingsMain
 
 class SettingsPresenter(
     private val view: SettingsMain.View,

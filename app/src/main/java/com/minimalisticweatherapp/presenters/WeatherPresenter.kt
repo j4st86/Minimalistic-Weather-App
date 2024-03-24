@@ -1,8 +1,10 @@
-package com.minimalisticweatherapp
+package com.minimalisticweatherapp.presenters
 
+import com.minimalisticweatherapp.R
+import com.minimalisticweatherapp.WeatherMain
 import com.minimalisticweatherapp.extensions.directionTranslate
 import com.minimalisticweatherapp.extensions.weatherIconByCode
-import com.minimalisticweatherapp.model.LocationModel
+import com.minimalisticweatherapp.retrofit.LocationModel
 
 class WeatherPresenter(
     private val view: WeatherMain.View,

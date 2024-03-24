@@ -1,5 +1,7 @@
-package com.minimalisticweatherapp
+package com.minimalisticweatherapp.models
 
+import com.minimalisticweatherapp.BuildConfig
+import com.minimalisticweatherapp.WeatherMain
 import com.minimalisticweatherapp.retrofit.RetrofitClient
 import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 import retrofit2.Call

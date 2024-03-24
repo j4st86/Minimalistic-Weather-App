@@ -1,10 +1,14 @@
-package com.minimalisticweatherapp
+package com.minimalisticweatherapp.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.minimalisticweatherapp.R
+import com.minimalisticweatherapp.SettingsMain
+import com.minimalisticweatherapp.models.SettingsModel
+import com.minimalisticweatherapp.presenters.SettingsPresenter
 
 class SettingsActivity : AppCompatActivity(), SettingsMain.View {
     private val backImageView: AppCompatImageView by lazy { findViewById(R.id.back_iv) }

@@ -12,9 +12,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.minimalisticweatherapp.retrofit.LocationModel
 import com.google.android.gms.location.LocationServices
 import com.minimalisticweatherapp.R
+import com.minimalisticweatherapp.retrofit.LocationModel
 
 class LoadingActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class LoadingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_loading)
 
-        loadingTextView.text = "Weather"
+        loadingTextView.text = getString(R.string.weather_loading)
         loadingImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@LoadingActivity, R.drawable.ic_loading
@@ -58,7 +58,7 @@ class LoadingActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "GPS permission was not obtained, so the default location was exposed",
+                    getString(R.string.gps_was_not_obtained),
                     Toast.LENGTH_LONG
                 ).show()
                 navigateToMainActivityDefaultLocation()
@@ -75,7 +75,7 @@ class LoadingActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Failed to retrieve last location, so the default location was exposed",
+                    getString(R.string.failed_to_retrieve_last_location),
                     Toast.LENGTH_LONG
                 ).show()
                 navigateToMainActivityDefaultLocation()

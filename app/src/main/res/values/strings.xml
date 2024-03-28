@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Minimalistic Weather</string>
     <string name="button">Button</string>
+    <string name="desc_minimum_temperature_icon">Minimum temperature icon</string>
+    <string name="desc_maximum_temperature_icon">Maximum temperature icon</string>
+    <string name="desc_wind_speed_icon">Wind speed icon</string>
+    <string name="desc_pressure_icon">Pressure icon</string>
+    <string name="desc_humidity_icon">Humidity icon</string>
+    <string name="desc_sun_icon_morning">Sun icon (morning)</string>
+    <string name="desc_moon_icon_night">Moon icon (night)</string>
+    <string name="error_no_position_data_or_no_last_known_location">Error: Can\'t get position data or no last known location data</string>
+    <string name="weather_loading">Weather</string>
+    <string name="gps_was_not_obtained">GPS permission was not obtained, so the default location was exposed</string>
+    <string name="failed_to_retrieve_last_location">Failed to retrieve last location, so the default location was exposed</string>
+    <string name="settings_activity_name">Настройки</string>
 </resources>

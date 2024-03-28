@@ -72,8 +72,7 @@ interface WeatherMain {
 interface SettingsMain {
     interface View {
         fun showInterface(
-            backImage: Int,
-            activityName: String
+            backImage: Int
         )
     }
 

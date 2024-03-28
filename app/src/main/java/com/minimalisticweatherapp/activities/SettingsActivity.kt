@@ -29,12 +29,12 @@ class SettingsActivity : AppCompatActivity(), SettingsMain.View {
         }
     }
 
-    override fun showInterface(backImage: Int, activityName: String) {
+    override fun showInterface(backImage: Int) {
         backImageView.setImageDrawable(
             AppCompatResources.getDrawable(
                 this@SettingsActivity, backImage
             )
         )
-        activityTextView.text = activityName
+        activityTextView.text = getString(R.string.settings_activity_name)
     }
 }

@@ -70,7 +70,8 @@
             android:layout_height="10dp"
             app:layout_constraintStart_toStartOf="@+id/temp_tv"
             app:layout_constraintTop_toBottomOf="@+id/temp_tv"
-            tools:src="@drawable/ic_max_temp">
+            tools:src="@drawable/ic_max_temp"
+            android:contentDescription="@string/desc_maximum_temperature_icon">
 
         </ImageView>
 
@@ -107,7 +108,8 @@
             android:layout_height="10dp"
             app:layout_constraintEnd_toStartOf="@+id/min_temp_tv"
             app:layout_constraintTop_toTopOf="@+id/max_temp_iv"
-            tools:src="@drawable/ic_min_temp">
+            tools:src="@drawable/ic_min_temp"
+            android:contentDescription="@string/desc_minimum_temperature_icon">
 
         </ImageView>
 
@@ -161,7 +163,8 @@
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/wind_speed_tv"
             app:layout_constraintTop_toTopOf="@+id/wind_speed_tv"
-            tools:src="@drawable/ic_wind">
+            tools:src="@drawable/ic_wind"
+            android:contentDescription="@string/desc_wind_speed_icon">
 
         </ImageView>
 
@@ -172,7 +175,8 @@
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/pressure_tv"
             app:layout_constraintTop_toTopOf="@+id/pressure_tv"
-            tools:src="@drawable/ic_pressure">
+            tools:src="@drawable/ic_pressure"
+            android:contentDescription="@string/desc_pressure_icon">
 
         </ImageView>
 
@@ -183,7 +187,8 @@
             android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/humidity_tv"
             app:layout_constraintTop_toTopOf="@+id/humidity_tv"
-            tools:src="@drawable/ic_humidity">
+            tools:src="@drawable/ic_humidity"
+            android:contentDescription="@string/desc_humidity_icon">
 
         </ImageView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -219,7 +224,8 @@
             app:layout_constraintEnd_toStartOf="@+id/time_change_sb"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/time_change_sb"
-            tools:src="@drawable/ic_daytime">
+            tools:src="@drawable/ic_daytime"
+            android:contentDescription="@string/desc_sun_icon_morning">
 
         </ImageView>
 
@@ -231,7 +237,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/time_change_sb"
             app:layout_constraintTop_toTopOf="@+id/time_change_sb"
-            tools:src="@drawable/ic_nighttime">
+            tools:src="@drawable/ic_nighttime"
+            android:contentDescription="@string/desc_moon_icon_night">
 
         </ImageView>
 

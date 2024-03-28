@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
 
         val locationData =
             intent.getParcelableExtra<LocationModel>(EXTRA_LOCATION)
-                ?: throw Exception("Error: Can't get position data or no last known location data")
+                ?: throw Exception(getString(R.string.error_no_position_data_or_no_last_known_location))
 
         val model = WeatherModel()
         presenter = WeatherPresenter(this, model, locationData)

@@ -61,4 +61,21 @@ class WeatherPresenter(
             }
         }
     }
+
+    override fun update(selectedTime: Int) {
+        val hourWeatherData = model.getHourWeatherData(selectedTime)
+        view.updateWeatherView(
+            timeHour = "время $selectedTime:00",
+            temperatureHour = hourWeatherData.hourTempCelsius.toInt().toString() + "°",
+            windSpeedHour = (hourWeatherData.hourWindSpeedKph * 0.278).toInt()
+                .toString() + " мс, " + directionTranslate(hourWeatherData.hourWindDirection),
+            pressureHour = (hourWeatherData.hourPressureMb * 0.7501).toInt()
+                .toString() + " мм. рт. ст.",
+            humidityHour = hourWeatherData.hourHumidity.toString() + " %",
+            weatherIcon = weatherIconByCode(
+                hourWeatherData.hourWeatherCondition.weatherHourConditionCode,
+                hourWeatherData.hourIsDayCode
+            )
+        )
+    }
 }

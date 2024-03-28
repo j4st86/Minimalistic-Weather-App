@@ -4,6 +4,7 @@ import com.minimalisticweatherapp.BuildConfig
 import com.minimalisticweatherapp.WeatherMain
 import com.minimalisticweatherapp.retrofit.RetrofitClient
 import com.minimalisticweatherapp.retrofit.model.ForecastResponse
+import com.minimalisticweatherapp.retrofit.model.HourWeatherData
 import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,6 +14,9 @@ class WeatherModel : WeatherMain.Model {
 
     private val retrofitCurrent = RetrofitClient.retrofitWeatherAPI
     private val retrofitForecast = RetrofitClient.retrofitForecastAPI
+
+    lateinit var weatherResponse: WeatherResponse
+    lateinit var forecastResponse: ForecastResponse
 
     override fun fetchWeatherData(
         userLocation: String?,
@@ -28,7 +32,7 @@ class WeatherModel : WeatherMain.Model {
                 response: Response<WeatherResponse>
             ) {
                 if (response.isSuccessful) {
-                    val weatherResponse = response.body()
+                    weatherResponse = response.body()!!
                     callback(weatherResponse, null)
                 } else {
                     callback(null, Exception("Error: Weather request failed"))
@@ -54,7 +58,7 @@ class WeatherModel : WeatherMain.Model {
                 response: Response<ForecastResponse>
             ) {
                 if (response.isSuccessful) {
-                    val forecastResponse = response.body()
+                    forecastResponse = response.body()!!
                     callback(forecastResponse, null)
                 } else {
                     callback(null, Exception("Error: Forecast request failed"))
@@ -65,5 +69,9 @@ class WeatherModel : WeatherMain.Model {
                 callback(null, t)
             }
         })
+    }
+
+    override fun getHourWeatherData(selectedTime: Int): HourWeatherData {
+        return weatherResponse.weatherForecastData.forecastDayData[0].hourWeatherData[selectedTime]
     }
 }

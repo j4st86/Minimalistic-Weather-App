@@ -1,6 +1,7 @@
 package com.minimalisticweatherapp
 
 import com.minimalisticweatherapp.retrofit.model.ForecastResponse
+import com.minimalisticweatherapp.retrofit.model.HourWeatherData
 import com.minimalisticweatherapp.retrofit.model.WeatherResponse
 
 interface WeatherMain {
@@ -30,11 +31,24 @@ interface WeatherMain {
             nightTimeIcon: Int
         )
 
+        fun updateWeatherView(
+            timeHour: String,
+            temperatureHour: String,
+            windSpeedHour: String,
+            pressureHour: String,
+            humidityHour: String,
+            weatherIcon: Int
+        )
+
         fun showErrorMessage(message: String)
     }
 
     interface Presenter {
         fun start()
+
+        fun update(
+            selectedTime: Int
+        )
     }
 
     interface Model {
@@ -48,6 +62,10 @@ interface WeatherMain {
             longitude: String?,
             callback: (ForecastResponse?, Throwable?) -> Unit
         )
+
+        fun getHourWeatherData(
+            selectedTime: Int
+        ) : HourWeatherData
     }
 }
 

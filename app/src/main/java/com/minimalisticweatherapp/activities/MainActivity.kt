@@ -2,6 +2,7 @@ package com.minimalisticweatherapp.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,8 @@ import com.minimalisticweatherapp.WeatherMain
 import com.minimalisticweatherapp.models.WeatherModel
 import com.minimalisticweatherapp.presenters.WeatherPresenter
 import com.minimalisticweatherapp.retrofit.LocationModel
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class MainActivity : AppCompatActivity(), WeatherMain.View {
 
@@ -37,9 +40,9 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
     private val dayTimeImageView: AppCompatImageView by lazy { findViewById(R.id.daytime_iv) }
     private val nightTimeImageView: AppCompatImageView by lazy { findViewById(R.id.nighttime_iv) }
     private val sliderSeekBar: AppCompatSeekBar by lazy { findViewById(R.id.time_change_sb) }
+    private val timeSelectorTextView: AppCompatTextView by lazy { findViewById(R.id.time_tv) }
 
     private lateinit var presenter: WeatherMain.Presenter
-    //TODO добавить слайдер после температуры (можно пока не рабочий)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -57,6 +60,21 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
             intent = Intent(applicationContext, SettingsActivity::class.java)
             startActivity(intent)
         }
+
+        setCurrentPositionSlider()
+        sliderSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                presenter.update(progress)
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+
+            }
+        })
     }
 
     override fun showCurrentWeatherData(
@@ -147,8 +165,36 @@ class MainActivity : AppCompatActivity(), WeatherMain.View {
         )
     }
 
+    override fun updateWeatherView(
+        timeHour: String,
+        temperatureHour: String,
+        windSpeedHour: String,
+        pressureHour: String,
+        humidityHour: String,
+        weatherIcon: Int
+    ) {
+        timeSelectorTextView.text = timeHour
+        tempTextView.text = temperatureHour
+        windSpeedTextView.text = windSpeedHour
+        pressureTextView.text = pressureHour
+        humidityTextView.text = humidityHour
+        weatherImageView.setImageDrawable(
+            AppCompatResources.getDrawable(
+                this@MainActivity, weatherIcon
+            )
+        )
+    }
+
     override fun showErrorMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun setCurrentPositionSlider() {
+        val sdf = SimpleDateFormat("hh")
+        val hour = sdf.format(Date()).toInt()
+        sliderSeekBar.setProgress(hour, true)
+        val timeText = "время $hour:00"
+        timeSelectorTextView.text = timeText
     }
 
     companion object {

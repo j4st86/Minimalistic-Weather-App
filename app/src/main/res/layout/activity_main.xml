@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/temp_tv"
-            android:layout_width="104dp"
+            android:layout_width="120dp"
             android:layout_height="80dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
@@ -60,7 +60,7 @@
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="30">
+            tools:text="-44°">
 
         </TextView>
 
@@ -76,7 +76,7 @@
 
         <TextView
             android:id="@+id/max_temp_tv"
-            android:layout_width="28dp"
+            android:layout_width="30dp"
             android:layout_height="14dp"
             android:fontFamily="@font/montserrat_light"
             android:gravity="center"
@@ -84,20 +84,20 @@
             app:layout_constraintBottom_toBottomOf="@+id/max_temp_iv"
             app:layout_constraintStart_toEndOf="@+id/max_temp_iv"
             app:layout_constraintTop_toTopOf="@+id/max_temp_iv"
-            tools:text="32">
+            tools:text="-100°">
 
         </TextView>
 
         <TextView
             android:id="@+id/min_temp_tv"
-            android:layout_width="28dp"
+            android:layout_width="30dp"
             android:layout_height="14dp"
             android:fontFamily="@font/montserrat_light"
             android:gravity="center"
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="@+id/temp_tv"
             app:layout_constraintTop_toTopOf="@+id/max_temp_tv"
-            tools:text="-32">
+            tools:text="-100°">
 
         </TextView>
 
@@ -114,7 +114,7 @@
 
         <TextView
             android:id="@+id/wind_speed_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="106dp"
             android:layout_height="18dp"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="start"
@@ -128,7 +128,7 @@
 
         <TextView
             android:id="@+id/pressure_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="106dp"
             android:layout_height="18dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/montserrat_regular"
@@ -142,7 +142,7 @@
 
         <TextView
             android:id="@+id/humidity_tv"
-            android:layout_width="wrap_content"
+            android:layout_width="106dp"
             android:layout_height="18dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/montserrat_regular"
